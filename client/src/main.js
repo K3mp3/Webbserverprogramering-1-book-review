@@ -1,6 +1,4 @@
-// ========================================
-// IMPORTS
-// ========================================
+import axios from "axios";
 
 // ========================================
 // DOM-ELEMENT
@@ -8,25 +6,30 @@
 const form = document.querySelector(".review-form");
 const submitBtn = document.querySelector("button[type='submit']");
 
-
-let bookTitle = form.elements.bookTitle.value; // Läser in det som skrivs i namn input
-let author = form.elements.author.value; 
-let reviewer = form.elements.reviewer.value; 
-let rating = form.elements.rating.value; 
-let review = form.elements.review.value; 
-
 const API_URL = "http://localhost:3000/reviews";
-
-// ========================================
-// HJÄLPFUNKTIONER
-// ========================================
 
 /**
  * Kontrollerar om alla formulärfält är ifyllda
  */
 const checkInputs = () => {
-  // TODO: Hämta värden från alla input-fält
-  // TODO: Aktivera/inaktivera submit-knappen baserat på om alla fält är ifyllda
+  const bookTitle = form.elements.bookTitle.value;
+  const author = form.elements.author.value;
+  const reviewer = form.elements.reviewer.value;
+  const rating = form.elements.rating.value;
+  const review = form.elements.review.value;
+
+  if (
+    !bookTitle ||
+    !author ||
+    !reviewer ||
+    rating < 0 ||
+    rating > 5 ||
+    !review
+  ) {
+    submitBtn.disabled = true;
+  } else {
+    submitBtn.disabled = false;
+  }
 };
 
 /**
@@ -124,7 +127,40 @@ form.addEventListener("input", checkInputs);
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  if (!bookTitle || !author || !reviewer || !rating || !review) return alert("Fyll i alla fält!")
+  let bookTitle = form.elements.bookTitle.value;
+  let author = form.elements.author.value;
+  let reviewer = form.elements.reviewer.value;
+  let rating = form.elements.rating.value;
+  let review = form.elements.review.value;
+
+  if (!bookTitle || !author || !reviewer || rating < 0 || rating > 5 || !review)
+    return alert("Fyll i alla fält!");
+
+  const bookData = {
+    bookTitle,
+    author,
+    reviewer,
+    rating,
+    review,
+  };
+
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/save-review",
+      bookData
+    );
+
+    if (response.status === 201) {
+      alert("Meddelandet sparades!");
+      form.reset();
+    } else {
+      alert("Meddelandet kunde ej sparas!");
+    }
+  } catch (error) {
+    console.log(error);
+
+    alert("Meddelandet kunde ej sparas!");
+  }
 
   // TODO: Hämta alla värden från formuläret
   // TODO: Skapa ett reviewData-objekt
