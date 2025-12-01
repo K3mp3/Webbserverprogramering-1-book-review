@@ -6,5 +6,37 @@
     "rating": "4",
     "review": "wdadw",
     "id": "a51a67b9-9299-4102-b521-953e7b1e2f1e"
+  },
+  {
+    "bookTitle": "Bok ",
+    "author": "Peter",
+    "reviewer": "Anders",
+    "rating": "5",
+    "review": "awdawdawd",
+    "id": "6fac22cc-203f-4d9e-bedb-1deea6c4236b"
+  },
+  {
+    "bookTitle": "Titanic",
+    "author": "John Titanic",
+    "reviewer": "Hejsan",
+    "rating": "3",
+    "review": "Hej hej",
+    "id": "7cae806b-f157-4731-8ec1-8aad3f8b7ee4"
+  },
+  {
+    "bookTitle": "Bok ",
+    "author": "Peter",
+    "reviewer": "Anders",
+    "rating": "5",
+    "review": "drgcgr",
+    "id": "1823a36e-fa27-4118-a963-fd8c85c60b2c"
+  },
+  {
+    "bookTitle": "Bok ",
+    "author": "Peter",
+    "reviewer": "Anders",
+    "rating": "4",
+    "review": "wadwd",
+    "id": "dfdec486-2424-4452-99f1-229559c2b186"
   }
 ]

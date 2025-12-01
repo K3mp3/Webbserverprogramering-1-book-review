@@ -6,7 +6,7 @@ import axios from "axios";
 const form = document.querySelector(".review-form");
 const submitBtn = document.querySelector("button[type='submit']");
 
-const API_URL = "http://localhost:3000/reviews";
+const API_URL = "http://localhost:3000/";
 
 /**
  * Kontrollerar om alla formulärfält är ifyllda
@@ -107,9 +107,15 @@ const handleDelete = async (e) => {
  * Hämtar och visar alla recensioner från servern
  */
 const loadReviews = async () => {
-  // TODO: Skicka GET-request till backend
-  // TODO: Visa recensionerna med displayReviews()
-  // TODO: Hantera fel
+  try {
+    const response = await axios.get(`${API_URL}/reviews`);
+
+    console.log({ response: response.data.data });
+
+    displayReviews(response.data.data);
+  } catch (error) {
+    alert("Kunde ej hämta recensioner");
+  }
 };
 
 // ========================================
@@ -173,5 +179,5 @@ form.addEventListener("submit", async (e) => {
  * Laddar recensioner när sidan laddas
  */
 window.addEventListener("load", async () => {
-  // TODO: Anropa loadReviews()
+  loadReviews();
 });
