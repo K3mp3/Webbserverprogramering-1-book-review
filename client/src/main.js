@@ -6,7 +6,7 @@ import axios from "axios";
 const form = document.querySelector(".review-form");
 const submitBtn = document.querySelector("button[type='submit']");
 
-const API_URL = "http://localhost:3000/";
+const API_URL = "http://localhost:3000";
 
 /**
  * Kontrollerar om alla formulärfält är ifyllda

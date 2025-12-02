@@ -16,6 +16,20 @@ app.use(express.urlencoded({ extended: false }));
 
 const filePath = `${__dirname}/reviews.json`;
 
+const getReviews = () => {
+  const data = fs.readFileSync(filePath, "utf-8"); // Läser filens innehåll som text
+
+  try {
+    if (fs.existsSync(filePath)) return JSON.parse(data);
+
+    return [];
+  } catch (error) {
+    console.error("Error reading reviews:", error);
+
+    return [];
+  }
+};
+
 const saveReview = (bookReviews) => {
   let reviews = [];
 
@@ -45,6 +59,18 @@ const saveReview = (bookReviews) => {
     console.error("Error writing to reviews.json");
   }
 };
+
+app.get("/reviews", (req, res) => {
+  try {
+    const reviews = getReviews();
+
+    res.status(200).json({ success: true, data: reviews });
+  } catch (error) {
+    console.error("Error reading file:", error);
+
+    res.status(500).json({ success: false });
+  }
+});
 
 app.post("/save-review", (req, res) => {
   const { bookTitle, author, reviewer, rating, review } = req.body;
