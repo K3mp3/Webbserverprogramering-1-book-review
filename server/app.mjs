@@ -87,6 +87,7 @@ app.post("/save-review", (req, res) => {
       rating,
       review,
       id,
+      timestamp: new Date(),
     };
 
     console.log("bookData:", bookData);
